@@ -1,0 +1,546 @@
+ 
+Lab-01: Write a JAVA Program to Display Image using JFrame
+import java.awt.Color; // Import Color class for setting background color
+import java.awt.Dimension; // Import Dimension class for setting image size
+import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Image extends JFrame {
+    private ImageIcon image1;
+    private JLabel label1;
+    private ImageIcon image2;
+    private JLabel label2;
+
+    Image() {
+        // Set the layout and background color of the frame
+        setLayout(new FlowLayout());
+        getContentPane().setBackground(Color.RED); // Set background color to white
+        
+        image1 = new ImageIcon(getClass().getResource("sohel.png"));
+        label1 = new JLabel(image1);
+
+        // Set preferred size for label (adjust width and height of image)
+        label1.setPreferredSize(new Dimension(200, 200)); // Set width and height as needed
+        add(label1);
+
+        image2 = new ImageIcon(getClass().getResource("sohel.png"));
+        label2 = new JLabel(image2);
+
+        // Set preferred size for label (adjust width and height of image)
+        label2.setPreferredSize(new Dimension(500, 200)); // Set width and height as needed
+        add(label2);
+    }
+
+    public static void main(String args[]) {
+        Image gui = new Image();
+        gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gui.setVisible(true);
+        gui.pack();
+        gui.setTitle("Image Program");
+    }
+}
+
+
+Lab-02: Write a JAVA Program for generating Restaurant Bill
+# Source Code in JAVA
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.Color; // Import Color class for setting background and font color
+import java.awt.Font; // Import Font class for setting font style and size
+
+public class BillGeneration extends JFrame implements ActionListener {
+    JLabel l;
+    JCheckBox cb1, cb2, cb3;
+    JButton b;
+
+    BillGeneration() {
+        l = new JLabel("Food Ordering System");
+        l.setBounds(50, 50, 300, 20);
+        l.setForeground(Color.BLUE); // Set font color to blue
+        Font font = new Font("Arial", Font.BOLD, 20); // Create font
+        l.setFont(font); // Set font for label
+        cb1 = new JCheckBox("Pizza @ 100");
+        cb1.setBounds(100, 100, 150, 20);
+        cb2 = new JCheckBox("Burger @ 30");
+        cb2.setBounds(100, 150, 150, 20);
+        cb3 = new JCheckBox("Tea @ 10");
+        cb3.setBounds(100, 200, 150, 20);
+        b = new JButton("Order");
+        b.setBounds(100, 250, 80, 30);
+        b.addActionListener(this);
+        add(l);
+        add(cb1);
+        add(cb2);
+        add(cb3);
+        add(b);
+        setSize(400, 400);
+        getContentPane().setBackground(Color.RED); // Set background color to light gray
+        setLayout(null);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        float amount = 0;
+        String msg = "";
+        if (cb1.isSelected()) {
+            amount += 100;
+            msg = "Pizza: 100\n";
+        }
+        if (cb2.isSelected()) {
+            amount += 30;
+            msg += "Burger: 30\n";
+        }
+        if (cb3.isSelected()) {
+            amount += 10;
+            msg += "Tea: 10\n";
+        }
+        msg += "-----------------\n";
+        JOptionPane.showMessageDialog(this, msg + "Total: " + amount);
+    }
+
+    public static void main(String[] args) {
+        new BillGeneration();
+    }
+}
+
+Lab-03: Write a JAVA Program to Create a Student form in GUI
+# Source Code in JAVA
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class form implements ActionListener {
+    private static JLabel success;
+    private static JFrame frame;
+    private static JLabel label1, label2, label3;
+    private static JPanel panel;
+    private static JButton button;
+    private static JTextField userText1, userText2, userText3;
+
+    public static void main(String[] args) {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+        panel.setLayout(null);
+
+        // Setting heading label
+        JLabel heading = new JLabel("User Information");
+        heading.setBounds(120, 20, 200, 25);
+        heading.setForeground(Color.RED); // Setting heading color to blue
+        panel.add(heading);
+
+        // Setting labels for input fields
+        label1 = new JLabel("Name");
+        label1.setBounds(10, 60, 80, 25);
+        panel.add(label1);
+
+        label2 = new JLabel("Roll");
+        label2.setBounds(10, 100, 80, 25);
+        panel.add(label2);
+
+        label3 = new JLabel("Department");
+        label3.setBounds(10, 140, 80, 25);
+        panel.add(label3);
+
+        // Creating text fields for input
+        userText1 = new JTextField("Enter Your Name");
+        userText1.setBounds(100, 60, 200, 25);
+        panel.add(userText1);
+
+        userText2 = new JTextField("Enter Your Roll");
+        userText2.setBounds(100, 100, 200, 25);
+        panel.add(userText2);
+
+        userText3 = new JTextField("Enter Your Department");
+        userText3.setBounds(100, 140, 200, 25);
+        panel.add(userText3);
+
+        // Creating save button
+        button = new JButton("Save");
+        button.setBounds(150, 180, 80, 25);
+        button.addActionListener(new form());
+        panel.add(button);
+
+        // Adding label for success message
+        success = new JLabel("");
+        success.setBounds(130, 220, 300, 25);
+        success.setForeground(Color.GREEN); // Setting success message color to green
+        panel.add(success);
+
+        // Setting background color for panel
+        panel.setBackground(Color.BLUE);
+
+        frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Setting success message when save button is clicked
+        success.setText("Saved Successfully");
+    }
+}
+
+Lab-04: Write a JAVA Program to develop a simple calculator in GUI
+# Source Code in JAVA
+
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+public class calculator extends JFrame implements ActionListener{
+
+	 
+	private static final long serialVersionUID = -1315467733997126666L;
+
+	static JFrame frame;
+	static JTextField textField;
+	String first, second, operator;
+	
+	calculator() {
+		first = second = operator = "";
+	}
+	
+	public static void main(String[] args) throws UnsupportedLookAndFeelException {
+		
+		frame = new JFrame("cal");
+		UIManager.setLookAndFeel(UIManager.getLookAndFeel());
+		calculator calculator = new calculator();
+		textField = new JTextField(16);
+		textField.setEditable(false);
+		
+		JButton btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnAdd, btnSub, btnDiv, btnMul, btnDot,
+		btnClr, btnEq;
+		
+		btn0 = new JButton("0");
+		btn1 = new JButton("1");
+		btn2 = new JButton("2");
+		btn3 = new JButton("3");
+		btn4 = new JButton("4");
+		btn5 = new JButton("5");
+		btn6 = new JButton("6");
+		btn7 = new JButton("7");
+		btn8 = new JButton("8");
+		btn9 = new JButton("9");
+		
+		btnEq = new JButton("=");
+
+		btnAdd = new JButton("+");
+		btnSub = new JButton("-");
+		btnDiv = new JButton("/");
+		btnMul = new JButton("*");
+		btnClr = new JButton("C");
+
+		btnDot = new JButton(".");
+
+		btnMul.addActionListener(calculator);
+		btnDiv.addActionListener(calculator);
+		btnSub.addActionListener(calculator);
+		btnAdd.addActionListener(calculator);
+		btn9.addActionListener(calculator);
+		btn8.addActionListener(calculator);
+		btn7.addActionListener(calculator);
+		btn6.addActionListener(calculator);
+		btn5.addActionListener(calculator);
+		btn4.addActionListener(calculator);
+		btn3.addActionListener(calculator);
+		btn2.addActionListener(calculator);
+		btn1.addActionListener(calculator);
+		btn0.addActionListener(calculator);
+		btnDot.addActionListener(calculator);
+		btnClr.addActionListener(calculator);
+		btnEq.addActionListener(calculator);
+		
+		JPanel panel = new JPanel();
+		panel.add(textField);
+		panel.add(btn7);
+		panel.add(btn8);
+		panel.add(btn9);
+		panel.add(btnDiv);
+		panel.add(btn4);
+		panel.add(btn5);
+		panel.add(btn6);
+		panel.add(btnMul);
+		panel.add(btn1);
+		panel.add(btn2);
+		panel.add(btn3);
+		panel.add(btnSub);
+		panel.add(btnDot);
+		panel.add(btnClr);
+		panel.add(btn0);
+		panel.add(btnAdd);
+		panel.add(btnEq);
+		
+		panel.setBackground(Color.GREEN);
+		
+		frame.add(panel);
+		frame.setSize(200, 220);
+		frame.show();
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		String action = e.getActionCommand();
+		// if the value is number
+		if ((action.charAt(0) >= '0' && action.charAt(0) <= '9') || action.charAt(0) == '.') {
+			if(action.equals(".") && first.contains(".")) {
+				// no action
+			}
+			else if (!operator.equals(""))
+				second = second + action;
+			else
+				first = first + action;
+
+			textField.setText(first + operator + second);
+		}else if (action.charAt(0) == 'C') {
+			operator = second = "";
+			first = "0";
+			// set the value of text
+			textField.setText(first + operator + second);
+		}else if (action.charAt(0) == '=' && !first.equalsIgnoreCase("") && !second.equalsIgnoreCase("")) {
+
+			double result;
+			if (operator.equals("+"))
+				result = (Double.parseDouble(first) + Double.parseDouble(second));
+			else if (operator.equals("-"))
+				result = (Double.parseDouble(first) - Double.parseDouble(second));
+			else if (operator.equals("/"))
+				result = (Double.parseDouble(first) / Double.parseDouble(second));
+			else
+				result = (Double.parseDouble(first) * Double.parseDouble(second));
+
+			textField.setText(first + operator + second + "=" + result);
+			first = Double.toString(result);
+			operator = second = "";
+		} else {
+			if (operator.equals("") || second.equals(""))
+				operator = action;
+			else {
+				double result;
+				if (operator.equals("+"))
+					result = (Double.parseDouble(first) + Double.parseDouble(second));
+				else if (operator.equals("-"))
+					result = (Double.parseDouble(first) - Double.parseDouble(second));
+				else if (operator.equals("/"))
+					result = (Double.parseDouble(first) / Double.parseDouble(second));
+				else
+					result = (Double.parseDouble(first) * Double.parseDouble(second));
+				first = Double.toString(result);
+				operator = action;
+				second = "";
+			}
+
+			if (first.equals("")) {
+				first = operator = second = "";
+			} else if(second.equals("") && operator.equals("=")) {
+				operator = "";
+			}
+			textField.setText(first + operator + second);
+		}
+		
+	}
+
+}
+
+problem5: write a java program to create thread using thread class
+source code
+class A extends Thread{
+public void run(){
+for(int i=1;i<=5;i++)
+{
+System.out.println("\t From Thread A : i= "+i);
+}
+System.out.println("Exit from A");
+}
+}
+class B extends Thread {
+public void run( ){
+for(int j=1;j<=5;j++){
+System.out.println("\t From Thread B : j= "+j);
+}
+System.out.println("Exit from B");
+}
+}
+class C extends Thread {
+public void run( ){
+for(int k=1;k<=5;k++){
+System.out.println("\t From Thread C : K= "+k);
+}
+System.out.println("Exit from C");
+}
+}
+public class ThreadTestA {
+public static void main(String[] args) {
+System.out.println("The Thread is running");
+new A( ).start( );
+new B( ).start( );
+new C( ).start( );
+}}
+
+
+
+
+problem6:write a java program to call threads usig run() method
+source code
+class A extends Thread{
+public void run(){
+for(int i=1;i<=5;i++)
+{
+System.out.println("\t From Thread A : i= "+i);
+}
+System.out.println("Exit from A");
+}
+}
+class B extends Thread {
+public void run( ){
+for(int j=1;j<=5;j++){
+System.out.println("\t From Thread B : j= "+j);
+}
+System.out.println("Exit from B");
+}
+}
+class C extends Thread {
+public void run( ){
+for(int k=1;k<=5;k++){
+System.out.println("\t From Thread C : k= "+k);
+}
+System.out.println("Exit from C");
+}
+}
+public class ThreadTest {
+public static void main(String[] args) {
+new A( ).run( );
+new B( ).run( );
+new C( ).run( );
+}
+}
+
+problem7: write a java program to illustrate yield() and sleep() method using thread
+source code
+class A extends Thread {
+public void run() {
+for (int i = 1; i <= 5; i++) {
+if (i == 1)
+yield();
+System.out.println("\t From Thread A : i= " + i);
+}
+System.out.println("Exit from A");
+}
+}
+class B extends Thread {
+public void run() {
+for (int j = 1; j <= 5; j++) {
+System.out.println("\t From Thread B : j= " + j);
+if (j == 3) {
+// Gracefully terminate the thread
+break;
+}
+}
+System.out.println("Exit from B");
+}
+}
+class C extends Thread {
+public void run() {
+for (int k = 1; k <= 5; k++) {
+System.out.println("\t From Thread C : k= " + k);
+if (k == 1) {
+try {
+sleep(1000); // Pause for 1 second
+} catch (InterruptedException e) {
+e.printStackTrace();
+}
+}
+}
+System.out.println("Exit from C");
+}
+}
+public class ThreadMethod {
+public static void main(String[] args) {
+A threadA = new A();
+B threadB = new B();
+C threadC = new C();
+System.out.println("Start thread A");
+threadA.start();
+System.out.println("Start thread B");
+threadB.start();
+System.out.println("Start thread C");
+threadC.start();
+System.out.println("End of the main thread");
+}
+}
+
+
+probel8:write ajava program to use priority of thread 
+source code:
+class A extends Thread {
+    public void run() {
+      System.out.println("Thread A started");
+      for (int i = 1; i <= 5; i++) {
+        System.out.println("\tFrom Thread A : i= " + i);
+      }
+      System.out.println("Exit from A");
+    }
+  }
+  
+  class B extends Thread {
+    public void run() {
+      System.out.println("Thread B started");
+      for (int i = 1; i <= 5; i++) {
+        System.out.println("\tFrom Thread B : i= " + i);
+      }
+      System.out.println("Exit from B");
+    }
+  }
+  
+  class C extends Thread {
+    public void run() {
+      System.out.println("Thread C started");
+      for (int i = 1; i <= 5; i++) {
+        System.out.println("\tFrom Thread C : i= " + i);
+      }
+      System.out.println("Exit from C");
+    }
+  }
+  
+  class ThreadPriority {
+    public static void main(String args[]) {
+      A threadA = new A();
+      B threadB = new B();
+      C threadC = new C();
+  
+      threadC.setPriority(Thread.MAX_PRIORITY);
+      threadB.setPriority(Thread.MAX_PRIORITY);
+      threadA.setPriority(Thread.MAX_PRIORITY);
+
+      System.out.println("Start thread A");
+      threadA.start();
+
+      System.out.println("Start thread B");
+      threadB.start();
+
+      System.out.println("Start thread C");
+      threadC.start();
+    }
+  }
+  
+problem9: write a client and server program in java to estabilsh a connection between them
